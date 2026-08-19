@@ -33,7 +33,7 @@ export function ProductDetailProvider({ children }: { children: ReactNode }) {
 
   const isInverter = product?.kind === "inverter";
   const plans = PM_PLANS[isInverter ? "inverter" : "part"];
-  const plan = plans[pmIndex];
+  const plan = plans[pmIndex] ?? plans[0]!;
 
   function addToCart() {
     if (!product) return;
