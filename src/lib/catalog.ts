@@ -1,0 +1,247 @@
+import inverter2kw from "@/assets/inverter-2kw.jpg";
+import inverter3kw from "@/assets/inverter-3kw.jpg";
+import inverter5kw from "@/assets/inverter-5kw.jpg";
+import panels4 from "@/assets/panels-4.jpg";
+import panels6 from "@/assets/panels-6.jpg";
+import panels10 from "@/assets/panels-10.jpg";
+import mounting from "@/assets/mounting.jpg";
+import wiring from "@/assets/wiring.jpg";
+import bos from "@/assets/bos.jpg";
+import kit2kw from "@/assets/kit-2kw.jpg";
+import kit3kw from "@/assets/kit-3kw.jpg";
+import kit5kw from "@/assets/kit-5kw.jpg";
+
+/* Placeholder discounts — illustrative, pending vendor-quote lock.
+   Kits (15%) is the only locked figure. */
+export const DISCOUNT = { kit: 0.15, part: 0.07, inverterPart: 0.08 };
+
+export type PmPlan = { yrs: string; cost: number };
+
+export const PM_PLANS: Record<"part" | "inverter" | "kit", PmPlan[]> = {
+  part: [
+    { yrs: "No PM plan", cost: 0 },
+    { yrs: "3-yr PM", cost: 299 },
+    { yrs: "5-yr PM", cost: 449 },
+  ],
+  inverter: [
+    { yrs: "No PM plan", cost: 0 },
+    { yrs: "3-yr PM", cost: 499 },
+    { yrs: "5-yr PM", cost: 899 },
+  ],
+  kit: [
+    { yrs: "No PM plan", cost: 0 },
+    { yrs: "3-yr PM", cost: 999 },
+    { yrs: "5-yr PM", cost: 1499 },
+  ],
+};
+
+export type Product = {
+  id: string;
+  kind: "inverter" | "part";
+  category: string;
+  categoryLabel: string;
+  qty?: string;
+  sizeBadge?: string;
+  name: string;
+  market: number;
+  desc: string;
+  vendor?: string;
+  warranty: string;
+  img: string;
+};
+
+export const INVERTERS: Product[] = [
+  {
+    id: "inv-2kw",
+    kind: "inverter",
+    category: "inverters",
+    categoryLabel: "Inverters",
+    sizeBadge: "2kW",
+    name: "JetFlo Volt 2kW Inverter",
+    market: 38000,
+    desc: "Single-string, grid-tied, sized for a 2kW starter roof.",
+    warranty: "5-yr JetFlo warranty",
+    img: inverter2kw,
+  },
+  {
+    id: "inv-3kw",
+    kind: "inverter",
+    category: "inverters",
+    categoryLabel: "Inverters",
+    sizeBadge: "3kW",
+    name: "JetFlo Volt 3kW Inverter",
+    market: 52000,
+    desc: "Twin-string, our best-selling inverter — sized for most Indian homes.",
+    warranty: "5-yr JetFlo warranty",
+    img: inverter3kw,
+  },
+  {
+    id: "inv-5kw",
+    kind: "inverter",
+    category: "inverters",
+    categoryLabel: "Inverters",
+    sizeBadge: "5kW",
+    name: "JetFlo Volt 5kW Inverter",
+    market: 78000,
+    desc: "Hybrid-ready, twin-string, DCDB/ACDB built in — sized for larger homes.",
+    warranty: "5-yr JetFlo warranty",
+    img: inverter5kw,
+  },
+];
+
+export const PARTS: Product[] = [
+  {
+    id: "pan-2kw",
+    kind: "part",
+    category: "panels",
+    categoryLabel: "For 2kW roof",
+    qty: "× 4",
+    name: "545W Mono PERC Panel — Set of 4",
+    market: 54000,
+    desc: "Recommended set for a 2kW roof. Vendor currently fulfilling: revealed inside.",
+    vendor: "Waaree",
+    warranty: "3-yr top-up warranty",
+    img: panels4,
+  },
+  {
+    id: "pan-3kw",
+    kind: "part",
+    category: "panels",
+    categoryLabel: "For 3kW roof",
+    qty: "× 6",
+    name: "545W Mono PERC Panel — Set of 6",
+    market: 81000,
+    desc: "Recommended set for a 3kW roof. Vendor currently fulfilling: revealed inside.",
+    vendor: "Adani Solar",
+    warranty: "3-yr top-up warranty",
+    img: panels6,
+  },
+  {
+    id: "pan-5kw",
+    kind: "part",
+    category: "panels",
+    categoryLabel: "For 5kW roof",
+    qty: "× 10",
+    name: "545W Mono PERC Panel — Set of 10",
+    market: 135000,
+    desc: "Recommended set for a 5kW roof. Vendor currently fulfilling: revealed inside.",
+    vendor: "Tata Power Solar",
+    warranty: "3-yr top-up warranty",
+    img: panels10,
+  },
+  {
+    id: "acc-mount",
+    kind: "part",
+    category: "mounting",
+    categoryLabel: "All roof sizes",
+    name: "Mounting Structure Kit",
+    market: 18000,
+    desc: "Cyclone-rated aluminium structure, per-kit hardware set.",
+    vendor: "Rotomag Fabrication",
+    warranty: "3-yr top-up warranty",
+    img: mounting,
+  },
+  {
+    id: "acc-wire",
+    kind: "part",
+    category: "wiring",
+    categoryLabel: "All roof sizes",
+    name: "Wiring & Cable Set",
+    market: 9000,
+    desc: "DC/AC cabling, MC4 connectors, earthing kit.",
+    vendor: "Polycab",
+    warranty: "3-yr top-up warranty",
+    img: wiring,
+  },
+  {
+    id: "acc-bos",
+    kind: "part",
+    category: "bos",
+    categoryLabel: "All roof sizes",
+    name: "DCDB / ACDB Combo Box",
+    market: 6500,
+    desc: "Surge protection, isolation switches, pre-wired combo unit.",
+    vendor: "Havells",
+    warranty: "3-yr top-up warranty",
+    img: bos,
+  },
+];
+
+export const PART_FILTERS = [
+  { key: "all", label: "All parts" },
+  { key: "panels", label: "Panels" },
+  { key: "mounting", label: "Mounting" },
+  { key: "wiring", label: "Wiring" },
+  { key: "bos", label: "BOS" },
+];
+
+export type Kit = {
+  id: string;
+  tag: string;
+  kw: string;
+  name: string;
+  market: number;
+  featured?: boolean;
+  img: string;
+  desc: string;
+  contents: { label: string; mfg: boolean }[];
+};
+
+export const KITS: Kit[] = [
+  {
+    id: "kit-2kw",
+    tag: "The Starter Roof",
+    kw: "2 kW",
+    name: "JetFlo 2kW Kit",
+    market: 95000,
+    img: kit2kw,
+    desc: "Runs the everyday load of a small home — fans, lights, TV, fridge and a single AC in short bursts.",
+    contents: [
+      { label: "JetFlo Volt 2kW Inverter", mfg: true },
+      { label: "4 × 545W Panels", mfg: false },
+      { label: "Mounting structure kit", mfg: false },
+      { label: "Wiring, BOS & combo box", mfg: false },
+    ],
+  },
+  {
+    id: "kit-3kw",
+    tag: "The Everyday Best-Seller",
+    kw: "3 kW",
+    name: "JetFlo 3kW Kit",
+    market: 142000,
+    featured: true,
+    img: kit3kw,
+    desc: "The sweet spot for most Indian homes — covers a full family's load including 1–2 ACs through the day.",
+    contents: [
+      { label: "JetFlo Volt 3kW Inverter", mfg: true },
+      { label: "6 × 545W Panels", mfg: false },
+      { label: "Cyclone-rated mounting structure", mfg: false },
+      { label: "Wiring, BOS & combo box", mfg: false },
+    ],
+  },
+  {
+    id: "kit-5kw",
+    tag: "The Full-Load Roof",
+    kw: "5 kW",
+    name: "JetFlo 5kW Kit",
+    market: 235000,
+    img: kit5kw,
+    desc: "Built for larger homes and small commercial units running multiple ACs, pumps and machines.",
+    contents: [
+      { label: "JetFlo Volt 5kW Inverter (hybrid-ready)", mfg: true },
+      { label: "10 × 545W Panels", mfg: false },
+      { label: "Cyclone-rated mounting structure", mfg: false },
+      { label: "Wiring, BOS, DCDB/ACDB & surge protection", mfg: false },
+    ],
+  },
+];
+
+export const ALL_PRODUCTS = [...INVERTERS, ...PARTS];
+
+export function findProduct(id: string) {
+  return ALL_PRODUCTS.find((p) => p.id === id);
+}
+
+export function fmt(n: number) {
+  return "₹" + Math.round(n).toLocaleString("en-IN");
+}
