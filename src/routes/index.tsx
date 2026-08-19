@@ -1,24 +1,185 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, Compass, IndianRupee, Truck, Wrench } from "lucide-react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import heroImage from "@/assets/hero-install.jpg";
+import explainerMfg from "@/assets/explainer-manufactured.jpg";
+import explainerPowered from "@/assets/explainer-powered.jpg";
+import { MfgBadge, PoweredBadge } from "@/components/site/Badges";
+
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "JetFlo — Rooftop Solar Kits & Components for Installer-Partners" },
+      {
+        name: "description",
+        content:
+          "JetFlo by Claro Energy supplies installer-partners across AP & Telangana with self-manufactured Volt inverters and vetted solar components — 15% below market on kits, 3–6 day delivery.",
+      },
+      {
+        property: "og:title",
+        content: "JetFlo — Rooftop Solar Kits & Components",
+      },
+      {
+        property: "og:description",
+        content:
+          "Pre-configured 2/3/5kW rooftop kits and individual parts for installer-partners. JetFlo price revealed at checkout.",
+      },
+    ],
+  }),
+  component: Home,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+const promises = [
+  { icon: IndianRupee, stat: "15% off", label: "on every pre-configured kit" },
+  { icon: Truck, stat: "3–6 days", label: "assured delivery, every order" },
+  { icon: Wrench, stat: "3–5 yrs", label: "Preventive Maintenance, your choice" },
+];
+
+function Home() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="mx-auto max-w-[1180px] px-5 sm:px-8">
+      {/* Hero */}
+      <section className="pt-14 pb-4 sm:pt-20">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+          <div>
+            <div className="eyebrow eyebrow-dot mb-5">
+              Now shipping · JetFlo Volt, self-manufactured
+            </div>
+            <h1 className="font-display text-[2.1rem] leading-[1.08] sm:text-[2.9rem]">
+              Solar kits and parts,
+              <br />
+              <span className="text-amber">priced honestly.</span>
+            </h1>
+            <p className="mt-5 max-w-[560px] text-[15.5px] text-muted-foreground">
+              JetFlo inverters are made in-house. Every other component ships{" "}
+              <strong className="font-bold text-foreground">powered by JetFlo</strong> — vetted, in
+              stock, and swapped between top vendors without you ever having to choose. Order a
+              full kit, or just the part you're short on.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                to="/kits"
+                className="inline-flex items-center gap-2 rounded-full bg-amber px-6 py-3.5 font-display text-[13.5px] font-extrabold text-accent-foreground transition-all hover:-translate-y-0.5 hover:shadow-lift"
+              >
+                Browse pre-configured kits <ArrowRight className="size-4" />
+              </Link>
+              <Link
+                to="/powered-by-jetflo"
+                className="inline-flex items-center rounded-full border border-border bg-card px-6 py-3.5 font-display text-[13.5px] font-bold transition-colors hover:border-foreground/40"
+              >
+                Shop individual parts
+              </Link>
+            </div>
+          </div>
+
+          <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-card">
+            <img
+              src={heroImage}
+              alt="Installers fitting a JetFlo rooftop solar kit"
+              width={1408}
+              height={1056}
+              className="aspect-[4/3] w-full object-cover"
+            />
+          </div>
+        </div>
+
+        {/* Promise bar */}
+        <div className="mt-12 grid overflow-hidden rounded-2xl border border-border bg-card shadow-card sm:grid-cols-3">
+          {promises.map(({ icon: Icon, stat, label }) => (
+            <div
+              key={stat}
+              className="flex items-center gap-4 border-b border-border p-6 last:border-b-0 sm:border-r sm:border-b-0 sm:last:border-r-0"
+            >
+              <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-primary text-amber">
+                <Icon className="size-5" />
+              </span>
+              <div className="min-w-0">
+                <div className="font-display text-xl leading-none font-extrabold">{stat}</div>
+                <div className="mt-1 text-[11.5px] font-bold text-muted-foreground">{label}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Pricing transparency strip */}
+        <div className="mt-6 flex items-start gap-3 rounded-2xl border border-dashed border-amber bg-amber-soft px-5 py-4 text-[13px] text-amber-ink">
+          <Compass className="mt-0.5 size-4 shrink-0" />
+          <p>
+            <b className="text-foreground">
+              Prices shown while browsing are open-market reference prices.
+            </b>{" "}
+            Your discounted JetFlo price — 15% off kits, a smaller % off individual parts — is
+            calculated and revealed at checkout, not before. Figures here are illustrative, pending
+            vendor lock. Photos are representative imagery, not the exact SKUs.
+          </p>
+        </div>
+      </section>
+
+      {/* Two ways to buy */}
+      <section className="mt-20">
+        <div className="max-w-[620px]">
+          <h2 className="font-display text-2xl sm:text-[1.7rem]">
+            Two ways to buy. One promise behind both.
+          </h2>
+          <p className="mt-2.5 text-[13.5px] text-muted-foreground">
+            Whichever way a partner shops, the component actually arriving is the same vetted part —
+            just sourced against live stock, not a fixed brand contract.
+          </p>
+        </div>
+
+        <div className="mt-7 grid gap-4 md:grid-cols-2">
+          <article className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
+            <img
+              src={explainerMfg}
+              alt="A JetFlo Volt inverter being mounted"
+              loading="lazy"
+              width={1200}
+              height={800}
+              className="h-44 w-full object-cover"
+            />
+            <div className="p-6">
+              <MfgBadge />
+              <h3 className="mt-3.5 font-display text-lg">JetFlo Volt Inverters</h3>
+              <p className="mt-2 text-[13.5px] text-muted-foreground">
+                Built in our own facility. No vendor swap, ever — it's the one part of every kit we
+                make ourselves. Backed by a 5-year warranty, the strongest cover in the category.
+              </p>
+              <Link
+                to="/inverters"
+                className="mt-4 inline-flex items-center gap-1.5 font-display text-[13px] font-bold text-amber-ink hover:gap-2.5"
+              >
+                See all three sizes <ArrowRight className="size-3.5" />
+              </Link>
+            </div>
+          </article>
+
+          <article className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
+            <img
+              src={explainerPowered}
+              alt="Pallets of solar panels in a JetFlo warehouse"
+              loading="lazy"
+              width={1200}
+              height={800}
+              className="h-44 w-full object-cover"
+            />
+            <div className="p-6">
+              <PoweredBadge />
+              <h3 className="mt-3.5 font-display text-lg">Panels, mounting, wiring &amp; BOS</h3>
+              <p className="mt-2 text-[13.5px] text-muted-foreground">
+                Sourced from whichever approved vendor has stock this week — vendors rotate in
+                behind the scenes. You never pick a brand; you just get the part, fast, with a
+                3-year top-up warranty.
+              </p>
+              <Link
+                to="/powered-by-jetflo"
+                className="mt-4 inline-flex items-center gap-1.5 font-display text-[13px] font-bold text-amber-ink hover:gap-2.5"
+              >
+                Shop the parts catalogue <ArrowRight className="size-3.5" />
+              </Link>
+            </div>
+          </article>
+        </div>
+      </section>
     </div>
   );
 }
