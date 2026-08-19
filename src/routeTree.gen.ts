@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as InvertersRouteImport } from './routes/inverters'
+import { Route as KitsRouteImport } from './routes/kits'
+import { Route as PoweredByJetfloRouteImport } from './routes/powered-by-jetflo'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InvertersRoute = InvertersRouteImport.update({
+  id: '/inverters',
+  path: '/inverters',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KitsRoute = KitsRouteImport.update({
+  id: '/kits',
+  path: '/kits',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoweredByJetfloRoute = PoweredByJetfloRouteImport.update({
+  id: '/powered-by-jetflo',
+  path: '/powered-by-jetflo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/inverters': typeof InvertersRoute
+  '/kits': typeof KitsRoute
+  '/powered-by-jetflo': typeof PoweredByJetfloRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/inverters': typeof InvertersRoute
+  '/kits': typeof KitsRoute
+  '/powered-by-jetflo': typeof PoweredByJetfloRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/inverters': typeof InvertersRoute
+  '/kits': typeof KitsRoute
+  '/powered-by-jetflo': typeof PoweredByJetfloRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/inverters' | '/kits' | '/powered-by-jetflo'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/inverters' | '/kits' | '/powered-by-jetflo'
+  id: '__root__' | '/' | '/inverters' | '/kits' | '/powered-by-jetflo'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  InvertersRoute: typeof InvertersRoute
+  KitsRoute: typeof KitsRoute
+  PoweredByJetfloRoute: typeof PoweredByJetfloRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/inverters': {
+      id: '/inverters'
+      path: '/inverters'
+      fullPath: '/inverters'
+      preLoaderRoute: typeof InvertersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kits': {
+      id: '/kits'
+      path: '/kits'
+      fullPath: '/kits'
+      preLoaderRoute: typeof KitsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/powered-by-jetflo': {
+      id: '/powered-by-jetflo'
+      path: '/powered-by-jetflo'
+      fullPath: '/powered-by-jetflo'
+      preLoaderRoute: typeof PoweredByJetfloRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  InvertersRoute: InvertersRoute,
+  KitsRoute: KitsRoute,
+  PoweredByJetfloRoute: PoweredByJetfloRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
