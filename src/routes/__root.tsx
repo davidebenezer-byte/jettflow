@@ -16,6 +16,7 @@ import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { CartDrawer } from "@/components/site/CartDrawer";
 import { ProductDetailProvider } from "@/components/site/ProductDetailPanel";
+import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -131,6 +132,7 @@ function RootComponent() {
             <Footer />
           </div>
           <CartDrawer />
+          <Toaster />
         </ProductDetailProvider>
       </CartProvider>
     </QueryClientProvider>

@@ -68,7 +68,7 @@ export function ProductCard({ product }: { product: Product }) {
               onClick={quickAdd}
               className="flex-1 rounded-full bg-primary px-4 py-2.5 font-display text-[12.5px] font-bold text-primary-foreground transition-colors hover:bg-primary/90"
             >
-              Add to cart
+              Add to quote
             </button>
           </div>
         </div>

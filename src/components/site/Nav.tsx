@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ShoppingCart } from "lucide-react";
+import { ClipboardList } from "lucide-react";
 
 import logo from "@/assets/jetflo-logo.png";
 import { useCart } from "@/lib/cart";
@@ -7,7 +7,8 @@ import { useCart } from "@/lib/cart";
 const links = [
   { to: "/inverters", label: "JetFlo Inverters" },
   { to: "/powered-by-jetflo", label: "Powered by JetFlo" },
-  { to: "/kits", label: "Order Kits" },
+  { to: "/kits", label: "Solar Kits" },
+  { to: "/enquiry", label: "Get a Quote" },
 ];
 
 export function Nav() {
@@ -38,8 +39,8 @@ export function Nav() {
           onClick={openCart}
           className="relative shrink-0 inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2.5 font-display text-[13px] font-bold text-primary-foreground"
         >
-          <ShoppingCart className="size-4" />
-          <span className="hidden sm:inline">Cart</span>
+          <ClipboardList className="size-4" />
+          <span className="hidden sm:inline">My list</span>
           <span className="absolute -top-1.5 -right-1.5 grid size-[19px] place-items-center rounded-full border-2 border-background bg-amber text-[10.5px] font-extrabold text-accent-foreground">
             {count}
           </span>

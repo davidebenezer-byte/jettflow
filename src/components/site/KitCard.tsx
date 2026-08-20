@@ -59,7 +59,7 @@ export function KitCard({ kit }: { kit: Kit }) {
         <div className="rounded-2xl bg-background p-4">
           <div className="font-display text-2xl font-extrabold">{fmt(kit.market)}</div>
           <div className="mt-1 text-[11.5px] text-muted-foreground italic">
-            Discounted price (15% off) calculated at checkout
+            Reference price · partners get 15% off, confirmed in your quote
           </div>
         </div>
 
@@ -91,7 +91,7 @@ export function KitCard({ kit }: { kit: Kit }) {
                 : "bg-primary text-primary-foreground hover:bg-primary/90",
             )}
           >
-            Add kit to cart
+            Add kit to quote
           </button>
         </div>
       </div>
