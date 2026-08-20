@@ -34,7 +34,7 @@ const inputCls =
   "mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-[13.5px] outline-none transition-colors placeholder:text-muted-foreground/70 focus:border-amber";
 const labelCls = "label-caps text-muted-foreground";
 
-export function LeadForm({ summary }: { summary?: string }) {
+export function LeadForm({ summary }: { summary?: string | undefined }) {
   const [values, setValues] = useState<Fields>(EMPTY);
   const [errors, setErrors] = useState<Partial<Record<keyof Fields, string>>>({});
   const [sending, setSending] = useState(false);

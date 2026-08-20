@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as EnquiryRouteImport } from './routes/enquiry'
 import { Route as InvertersRouteImport } from './routes/inverters'
 import { Route as KitsRouteImport } from './routes/kits'
 import { Route as PoweredByJetfloRouteImport } from './routes/powered-by-jetflo'
@@ -23,6 +24,11 @@ const IndexRoute = IndexRouteImport.update({
 const CheckoutRoute = CheckoutRouteImport.update({
   id: '/checkout',
   path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnquiryRoute = EnquiryRouteImport.update({
+  id: '/enquiry',
+  path: '/enquiry',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InvertersRoute = InvertersRouteImport.update({
@@ -44,6 +50,7 @@ const PoweredByJetfloRoute = PoweredByJetfloRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
+  '/enquiry': typeof EnquiryRoute
   '/inverters': typeof InvertersRoute
   '/kits': typeof KitsRoute
   '/powered-by-jetflo': typeof PoweredByJetfloRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
+  '/enquiry': typeof EnquiryRoute
   '/inverters': typeof InvertersRoute
   '/kits': typeof KitsRoute
   '/powered-by-jetflo': typeof PoweredByJetfloRoute
@@ -59,19 +67,33 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
+  '/enquiry': typeof EnquiryRoute
   '/inverters': typeof InvertersRoute
   '/kits': typeof KitsRoute
   '/powered-by-jetflo': typeof PoweredByJetfloRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/checkout' | '/inverters' | '/kits' | '/powered-by-jetflo'
+  fullPaths:
+    | '/'
+    | '/checkout'
+    | '/enquiry'
+    | '/inverters'
+    | '/kits'
+    | '/powered-by-jetflo'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/checkout' | '/inverters' | '/kits' | '/powered-by-jetflo'
+  to:
+    | '/'
+    | '/checkout'
+    | '/enquiry'
+    | '/inverters'
+    | '/kits'
+    | '/powered-by-jetflo'
   id:
     | '__root__'
     | '/'
     | '/checkout'
+    | '/enquiry'
     | '/inverters'
     | '/kits'
     | '/powered-by-jetflo'
@@ -80,6 +102,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CheckoutRoute: typeof CheckoutRoute
+  EnquiryRoute: typeof EnquiryRoute
   InvertersRoute: typeof InvertersRoute
   KitsRoute: typeof KitsRoute
   PoweredByJetfloRoute: typeof PoweredByJetfloRoute
@@ -99,6 +122,13 @@ declare module '@tanstack/react-router' {
       path: '/checkout'
       fullPath: '/checkout'
       preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/enquiry': {
+      id: '/enquiry'
+      path: '/enquiry'
+      fullPath: '/enquiry'
+      preLoaderRoute: typeof EnquiryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/inverters': {
@@ -128,6 +158,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CheckoutRoute: CheckoutRoute,
+  EnquiryRoute: EnquiryRoute,
   InvertersRoute: InvertersRoute,
   KitsRoute: KitsRoute,
   PoweredByJetfloRoute: PoweredByJetfloRoute,
