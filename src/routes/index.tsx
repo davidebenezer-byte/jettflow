@@ -53,8 +53,8 @@ function Home() {
             <p className="mt-5 max-w-[560px] text-[15.5px] text-muted-foreground">
               JetFlo inverters are made in-house. Every other component ships{" "}
               <strong className="font-bold text-foreground">powered by JetFlo</strong> — vetted, in
-              stock, and swapped between top vendors without you ever having to choose. Order a
-              full kit, or just the part you're short on.
+              stock, and swapped between top vendors without you ever having to choose. Build a
+              full kit or pick single parts, then ask us for a quote.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -64,10 +64,10 @@ function Home() {
                 Browse pre-configured kits <ArrowRight className="size-4" />
               </Link>
               <Link
-                to="/powered-by-jetflo"
+                to="/enquiry"
                 className="inline-flex items-center rounded-full border border-border bg-card px-6 py-3.5 font-display text-[13.5px] font-bold transition-colors hover:border-foreground/40"
               >
-                Shop individual parts
+                Get a quote
               </Link>
             </div>
           </div>
@@ -109,8 +109,7 @@ function Home() {
               Prices shown while browsing are open-market reference prices.
             </b>{" "}
             Your discounted JetFlo price — 15% off kits, a smaller % off individual parts — is
-            calculated and revealed at checkout, not before. Figures here are illustrative, pending
-            vendor lock. Photos are representative imagery, not the exact SKUs.
+            shown as an indicative figure once you review your list, and confirmed in the written quote we send you. Figures here are illustrative, pending vendor lock. Photos are representative imagery, not the exact SKUs.
           </p>
         </div>
       </section>
