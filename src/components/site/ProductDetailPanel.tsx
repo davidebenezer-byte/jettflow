@@ -109,7 +109,7 @@ export function ProductDetailProvider({ children }: { children: ReactNode }) {
               <div>
                 <div className="font-display text-xl font-extrabold">{fmt(product.market)}</div>
                 <div className="mt-0.5 text-[11.5px] text-muted-foreground italic">
-                  Discounted price calculated at checkout
+                  Reference price · your partner price comes with the quote
                 </div>
               </div>
 
@@ -118,7 +118,7 @@ export function ProductDetailProvider({ children }: { children: ReactNode }) {
                 onClick={addToCart}
                 className="w-full rounded-full bg-primary px-6 py-3.5 font-display text-[13.5px] font-extrabold text-primary-foreground transition-colors hover:bg-primary/90"
               >
-                Add to cart
+                Add to quote
               </button>
             </div>
           )}
