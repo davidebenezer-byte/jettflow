@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as EnquiryRouteImport } from './routes/enquiry'
 import { Route as InvertersRouteImport } from './routes/inverters'
@@ -19,6 +20,11 @@ import { Route as PoweredByJetfloRouteImport } from './routes/powered-by-jetflo'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutRoute = CheckoutRouteImport.update({
@@ -49,6 +55,7 @@ const PoweredByJetfloRoute = PoweredByJetfloRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/checkout': typeof CheckoutRoute
   '/enquiry': typeof EnquiryRoute
   '/inverters': typeof InvertersRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/checkout': typeof CheckoutRoute
   '/enquiry': typeof EnquiryRoute
   '/inverters': typeof InvertersRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/checkout': typeof CheckoutRoute
   '/enquiry': typeof EnquiryRoute
   '/inverters': typeof InvertersRoute
@@ -76,6 +85,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/checkout'
     | '/enquiry'
     | '/inverters'
@@ -84,6 +94,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
     | '/checkout'
     | '/enquiry'
     | '/inverters'
@@ -92,6 +103,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/checkout'
     | '/enquiry'
     | '/inverters'
@@ -101,6 +113,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   CheckoutRoute: typeof CheckoutRoute
   EnquiryRoute: typeof EnquiryRoute
   InvertersRoute: typeof InvertersRoute
@@ -115,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkout': {
@@ -157,6 +177,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   CheckoutRoute: CheckoutRoute,
   EnquiryRoute: EnquiryRoute,
   InvertersRoute: InvertersRoute,

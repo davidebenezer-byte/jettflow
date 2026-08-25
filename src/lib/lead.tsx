@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from "react";
 
-export type Lead = { name: string; phone: string; city: string };
+export type Lead = { name: string; phone: string; city: string; email: string; company?: string };
 
 type LeadContextValue = {
   lead: Lead | null;
@@ -30,7 +30,7 @@ export function LeadProvider({ children }: { children: ReactNode }) {
       const raw = window.localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw) as Lead;
-        if (parsed?.name && parsed?.phone && parsed?.city) setLead(parsed);
+        if (parsed?.name && parsed?.phone && parsed?.city && parsed?.email) setLead(parsed);
       }
     } catch {
       /* ignore malformed storage */

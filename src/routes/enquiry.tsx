@@ -6,7 +6,16 @@ import { LeadForm } from "@/components/site/LeadForm";
 import { fmt } from "@/lib/catalog";
 import { useCart } from "@/lib/cart";
 
+type EnquirySearch = {
+  delivery?: string;
+};
+
 export const Route = createFileRoute("/enquiry")({
+  validateSearch: (search: Record<string, unknown>): EnquirySearch => {
+    return {
+      delivery: typeof search.delivery === "string" ? search.delivery : undefined,
+    };
+  },
   head: () => ({
     meta: [
       { title: "Get a Quote — Talk to the JetFlo Supply Desk | JetFlo" },
@@ -34,12 +43,22 @@ const assurances = [
 
 function Enquiry() {
   const { lines, referenceTotal } = useCart();
+  const { delivery } = Route.useSearch();
+
+  const deliveryText =
+    delivery === "porter"
+      ? "Delivery Option: Get it delivered to your location (Powered by Porter - additional charges apply)"
+      : delivery === "pickup"
+      ? "Delivery Option: Pickup from Warehouse (Order available for Pickup Immediately)"
+      : undefined;
 
   const summary =
     lines.length > 0
       ? `${lines
           .map((l) => `${l.qty} × ${l.name} (PM: ${l.pmLabel})`)
-          .join("\n")}\nOpen-market reference total: ${fmt(referenceTotal)}`
+          .join("\n")}\nOpen-market reference total: ${fmt(referenceTotal)}${
+          deliveryText ? `\n${deliveryText}` : ""
+        }`
       : undefined;
 
   return (

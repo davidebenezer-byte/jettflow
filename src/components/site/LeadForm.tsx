@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Loader2, Send } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/lib/supabase";
 
 type Fields = {
   name: string;
@@ -56,18 +57,43 @@ export function LeadForm({ summary }: { summary?: string | undefined }) {
     return Object.keys(next).length === 0;
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!validate()) {
       toast.error("A few details are still missing.");
       return;
     }
     setSending(true);
-    window.setTimeout(() => {
+
+    try {
+      const { error } = await supabase
+        .from("leads")
+        .insert([
+          {
+            name: values.name.trim(),
+            company: values.company.trim() || null,
+            phone: values.phone.replace(/\D/g, "").slice(-10),
+            email: values.email.trim(),
+            city: values.city.trim(),
+            interest: values.interest,
+            notes: values.notes.trim() || null,
+            summary: summary || null,
+          },
+        ]);
+
+      if (error) {
+        console.error("Supabase insert error:", error);
+        toast.error("Failed to submit enquiry: " + error.message);
+      } else {
+        setDone(true);
+        toast.success("Enquiry received — our team will call you within one working day.");
+      }
+    } catch (err: any) {
+      console.error("Submission error:", err);
+      toast.error("An unexpected error occurred. Please try again.");
+    } finally {
       setSending(false);
-      setDone(true);
-      toast.success("Enquiry received — our team will call you within one working day.");
-    }, 700);
+    }
   }
 
   if (done) {

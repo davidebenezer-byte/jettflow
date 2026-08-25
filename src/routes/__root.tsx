@@ -116,18 +116,45 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+import { CityProvider, useCity } from "@/lib/city";
+import { CitySelection } from "@/components/site/CitySelection";
+import { LeadProvider } from "@/lib/lead";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
+      <CityProvider>
+        <InnerRoot />
+      </CityProvider>
+    </QueryClientProvider>
+  );
+}
+
+function InnerRoot() {
+  const { selectedCity, ready, setCity } = useCity();
+
+  if (!ready) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <div className="size-8 animate-spin rounded-full border-4 border-amber border-t-transparent" />
+      </div>
+    );
+  }
+
+  return (
+    <LeadProvider>
       <CartProvider>
         <ProductDetailProvider>
           <div className="flex min-h-screen flex-col">
             <Nav />
             <main className="flex-1">
-              {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-              <Outlet />
+              {selectedCity === "Hyderabad" ? (
+                <Outlet />
+              ) : (
+                <CitySelection onSelectCity={(city) => setCity(city)} />
+              )}
             </main>
             <Footer />
           </div>
@@ -135,6 +162,6 @@ function RootComponent() {
           <Toaster />
         </ProductDetailProvider>
       </CartProvider>
-    </QueryClientProvider>
+    </LeadProvider>
   );
 }

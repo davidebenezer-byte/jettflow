@@ -12,9 +12,8 @@ export const CITIES = [
 
 export type City = (typeof CITIES)[number];
 
-/** Warehouses that support in-person pickup. */
 export const PICKUP_HUBS: Record<string, string> = {
-  Hyderabad: "Kukatpally warehouse, Hyderabad",
+  Hyderabad: "Awfis Ohris Tech Park, Ground, 1st and 2nd floor, Plot no 13, Survey 64/2, (New) Software Units Layout Madhapur, HITEC City, Hyderabad, Telangana 500081",
   Bangalore: "Peenya Industrial Area warehouse, Bangalore",
   Goa: "Verna Industrial Estate warehouse, Goa",
   Visakhapatnam: "Autonagar warehouse, Visakhapatnam",

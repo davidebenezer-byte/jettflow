@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Compass, IndianRupee, Truck, Wrench } from "lucide-react";
+import { ArrowRight, Compass, IndianRupee, Truck, Wrench, ShieldCheck, Users, HeartHandshake, PiggyBank, TrendingUp, MapPin } from "lucide-react";
 
 import heroImage from "@/assets/hero-install.jpg";
 import explainerMfg from "@/assets/explainer-manufactured.jpg";
@@ -177,6 +177,98 @@ function Home() {
               </Link>
             </div>
           </article>
+        </div>
+      </section>
+
+      {/* Stats - Delivering Lasting Impact */}
+      <section className="mt-24 mb-16 border-t border-border/60 pt-16">
+        <div className="text-center">
+          <h2 className="font-display text-[2rem] font-extrabold sm:text-[2.6rem] text-foreground tracking-tight">
+            Delivering Lasting Impact
+          </h2>
+          <p className="mt-3 text-[14.5px] sm:text-[15.5px] text-muted-foreground max-w-[600px] mx-auto leading-relaxed">
+            Our work delivers meaningful environmental &amp; social impact
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Card 1 */}
+          <div className="flex flex-col items-center text-center p-8 rounded-3xl border border-border bg-card shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
+            <div className="grid size-12 place-items-center rounded-2xl bg-slate-100 text-slate-800 mb-5">
+              <ShieldCheck className="size-6 text-slate-800" />
+            </div>
+            <div className="font-display text-[2.2rem] font-black leading-none text-foreground tracking-tight">
+              274 million
+            </div>
+            <p className="mt-3 text-[13px] text-muted-foreground leading-relaxed max-w-[240px]">
+              kgs of carbon emissions avoided every year
+            </p>
+          </div>
+
+          {/* Card 2 */}
+          <div className="flex flex-col items-center text-center p-8 rounded-3xl border border-border bg-card shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
+            <div className="grid size-12 place-items-center rounded-2xl bg-slate-100 text-slate-800 mb-5">
+              <Users className="size-6 text-slate-800" />
+            </div>
+            <div className="font-display text-[2.2rem] font-black leading-none text-foreground tracking-tight">
+              1,10,000+
+            </div>
+            <p className="mt-3 text-[13px] text-muted-foreground leading-relaxed max-w-[240px]">
+              individuals benefiting from our work
+            </p>
+          </div>
+
+          {/* Card 3 */}
+          <div className="flex flex-col items-center text-center p-8 rounded-3xl border border-border bg-card shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
+            <div className="grid size-12 place-items-center rounded-2xl bg-slate-100 text-slate-800 mb-5">
+              <HeartHandshake className="size-6 text-slate-800" />
+            </div>
+            <div className="font-display text-[2.2rem] font-black leading-none text-foreground tracking-tight">
+              18,382
+            </div>
+            <p className="mt-3 text-[13px] text-muted-foreground leading-relaxed max-w-[240px]">
+              women farmers empowered with sustainable irrigation
+            </p>
+          </div>
+
+          {/* Card 4 */}
+          <div className="flex flex-col items-center text-center p-8 rounded-3xl border border-border bg-card shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
+            <div className="grid size-12 place-items-center rounded-2xl bg-slate-100 text-slate-800 mb-5">
+              <PiggyBank className="size-6 text-slate-800" />
+            </div>
+            <div className="font-display text-[2.2rem] font-black leading-none text-foreground tracking-tight">
+              $1.2 billion
+            </div>
+            <p className="mt-3 text-[13px] text-muted-foreground leading-relaxed max-w-[240px]">
+              cumulative diesel savings delivered till date
+            </p>
+          </div>
+
+          {/* Card 5 */}
+          <div className="flex flex-col items-center text-center p-8 rounded-3xl border border-border bg-card shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
+            <div className="grid size-12 place-items-center rounded-2xl bg-slate-100 text-slate-800 mb-5">
+              <TrendingUp className="size-6 text-slate-800" />
+            </div>
+            <div className="font-display text-[2.2rem] font-black leading-none text-foreground tracking-tight">
+              ~35%
+            </div>
+            <p className="mt-3 text-[13px] text-muted-foreground leading-relaxed max-w-[240px]">
+              average farm yield increase enabled by reliable &amp; on-demand solar irrigation
+            </p>
+          </div>
+
+          {/* Card 6 */}
+          <div className="flex flex-col items-center text-center p-8 rounded-3xl border border-border bg-card shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
+            <div className="grid size-12 place-items-center rounded-2xl bg-slate-100 text-slate-800 mb-5">
+              <MapPin className="size-6 text-slate-800" />
+            </div>
+            <div className="font-display text-[2.2rem] font-black leading-none text-foreground tracking-tight">
+              2,40,000+
+            </div>
+            <p className="mt-3 text-[13px] text-muted-foreground leading-relaxed max-w-[240px]">
+              acres of farmland now under assured solar irrigation
+            </p>
+          </div>
         </div>
       </section>
     </div>
