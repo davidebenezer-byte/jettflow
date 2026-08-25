@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Check } from "lucide-react";
 
-import { DISCOUNT, PM_PLANS, fmt, type Kit } from "@/lib/catalog";
+import { JETFLO_DISCOUNT, PM_PLANS, fmt, jetfloPrice, type Kit } from "@/lib/catalog";
 import { useCart } from "@/lib/cart";
 import { cn } from "@/lib/utils";
 import { MfgBadge, PoweredBadge } from "./Badges";
@@ -18,11 +18,12 @@ export function KitCard({ kit }: { kit: Kit }) {
       id: `${kit.id}|${plan.yrs}`,
       name: kit.name,
       img: kit.img,
-      unitPrice: kit.market * (1 - DISCOUNT.kit) + plan.cost,
+      unitPrice: jetfloPrice(kit.market) + plan.cost,
       marketPrice: kit.market + plan.cost,
       pmLabel: plan.yrs,
     });
   }
+
 
   return (
     <article
