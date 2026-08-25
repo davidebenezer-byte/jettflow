@@ -1,4 +1,4 @@
-import { DISCOUNT, fmt, type Product } from "@/lib/catalog";
+import { JETFLO_DISCOUNT, fmt, jetfloPrice, type Product } from "@/lib/catalog";
 import { useCart } from "@/lib/cart";
 import { MfgBadge, PoweredBadge, SizeBadge } from "./Badges";
 import { useProductDetail } from "./ProductDetailPanel";
@@ -9,16 +9,16 @@ export function ProductCard({ product }: { product: Product }) {
   const isInverter = product.kind === "inverter";
 
   function quickAdd() {
-    const discount = isInverter ? DISCOUNT.inverterPart : DISCOUNT.part;
     addLine({
       id: `${product.id}|nopm`,
       name: product.name,
       img: product.img,
-      unitPrice: product.market * (1 - discount),
+      unitPrice: jetfloPrice(product.market),
       marketPrice: product.market,
       pmLabel: "No PM plan",
     });
   }
+
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift">
