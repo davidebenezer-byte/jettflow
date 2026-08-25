@@ -2,13 +2,14 @@ import { createContext, useContext, useMemo, useState, type ReactNode } from "re
 import { ShieldCheck } from "lucide-react";
 
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { DISCOUNT, PM_PLANS, fmt, type Product } from "@/lib/catalog";
+import { JETFLO_DISCOUNT, PM_PLANS, fmt, jetfloPrice, type Product } from "@/lib/catalog";
 import { useCart } from "@/lib/cart";
 import { MfgBadge, PoweredBadge } from "./Badges";
 import { PmSelector } from "./PmSelector";
 
 type DetailContextValue = { openProduct: (product: Product) => void };
 const DetailContext = createContext<DetailContextValue | null>(null);
+
 
 export function useProductDetail() {
   const ctx = useContext(DetailContext);
