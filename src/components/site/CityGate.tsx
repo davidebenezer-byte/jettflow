@@ -137,7 +137,8 @@ export function CityGate() {
             We only use this to price, stock and deliver your order.
           </p>
         </form>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </div>
   );
 }
+
