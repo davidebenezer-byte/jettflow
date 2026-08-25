@@ -10,10 +10,22 @@ import bos from "@/assets/bos.jpg";
 import kit2kw from "@/assets/kit-2kw.jpg";
 import kit3kw from "@/assets/kit-3kw.jpg";
 import kit5kw from "@/assets/kit-5kw.jpg";
+import acdb from "@/assets/acdb.jpg";
+import dcdb from "@/assets/dcdb.jpg";
+import earthing from "@/assets/earthing.jpg";
+import surge from "@/assets/surge.jpg";
+import connectors from "@/assets/connectors.jpg";
+import meter from "@/assets/meter.jpg";
 
-/* Placeholder discounts — illustrative, pending vendor-quote lock.
-   Kits (15%) is the only locked figure. */
-export const DISCOUNT = { kit: 0.15, part: 0.07, inverterPart: 0.08 };
+/** JetFlo partner price is a flat 15% below the open-market reference. */
+export const JETFLO_DISCOUNT = 0.15;
+export const DISCOUNT = { kit: 0.15, part: 0.15, inverterPart: 0.15 };
+
+/** JetFlo price for a market figure. */
+export function jetfloPrice(market: number) {
+  return market * (1 - JETFLO_DISCOUNT);
+}
+
 
 export type PmPlan = { yrs: string; cost: number };
 
