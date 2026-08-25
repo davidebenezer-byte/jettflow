@@ -58,11 +58,19 @@ export function KitCard({ kit }: { kit: Kit }) {
         </div>
 
         <div className="rounded-2xl bg-background p-4">
-          <div className="font-display text-2xl font-extrabold">{fmt(kit.market)}</div>
-          <div className="mt-1 text-[11.5px] text-muted-foreground italic">
-            Reference price · partners get 15% off, confirmed in your quote
+          <div className="flex items-baseline gap-2.5">
+            <span className="font-display text-2xl font-extrabold text-amber-ink">
+              {fmt(jetfloPrice(kit.market))}
+            </span>
+            <span className="font-display text-[15px] text-muted-foreground line-through">
+              {fmt(kit.market)}
+            </span>
+          </div>
+          <div className="label-caps mt-2 inline-block rounded-full bg-amber-soft px-2.5 py-1 text-amber-ink">
+            JetFlo price · {Math.round(JETFLO_DISCOUNT * 100)}% below market
           </div>
         </div>
+
 
         <ul className="flex flex-col gap-2.5">
           {kit.contents.map((c) => (
