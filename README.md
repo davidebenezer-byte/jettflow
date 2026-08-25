@@ -1,14 +1,26 @@
-# Welcome to your Lovable project
+# Website Refresh Pro
+
+quick re-work
+
+Sharing a Prototype version of the new website structure
+
+I need a much more clean, simple and posh website in this layout/structure
+
+Replicate the pages as it is, work on the UI, Images and all other aspects
+
+Adding a plan document as well, also shared a few images for a design referance
 
 This project was built with [Lovable](https://lovable.dev).
 
+**Live app**: https://jetflo-v1.lovable.app
+
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/cb105cf0-3f82-4f3e-b843-e70e48385a66).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +32,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
