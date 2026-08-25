@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { ArrowRight, MapPin } from "lucide-react";
 
-import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { CITIES, pickupHub } from "@/lib/cities";
 import { useLead } from "@/lib/lead";
 
@@ -16,7 +15,7 @@ export function CityGate() {
   const [city, setCity] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const open = ready && !lead;
+  if (!ready || lead) return null;
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -31,14 +30,14 @@ export function CityGate() {
   }
 
   return (
-    <Dialog open={open}>
-      <DialogContent
-        showCloseButton={false}
-        onEscapeKeyDown={(e) => e.preventDefault()}
-        onPointerDownOutside={(e) => e.preventDefault()}
-        onInteractOutside={(e) => e.preventDefault()}
-        className="max-w-[440px] gap-0 rounded-3xl border-border bg-card p-0"
-      >
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Tell us where you're buying for"
+      className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-foreground/60 p-4 backdrop-blur-sm sm:items-center"
+    >
+      <div className="my-auto w-full max-w-[440px] overflow-hidden rounded-3xl border border-border bg-card shadow-lift">
+
         <div className="border-b border-border px-7 pt-7 pb-6">
           <span className="label-caps inline-flex items-center gap-2 rounded-full bg-amber-soft px-3 py-1.5 text-amber-ink">
             <MapPin className="size-3.5" /> Before you browse
