@@ -10,10 +10,22 @@ import bos from "@/assets/bos.jpg";
 import kit2kw from "@/assets/kit-2kw.jpg";
 import kit3kw from "@/assets/kit-3kw.jpg";
 import kit5kw from "@/assets/kit-5kw.jpg";
+import acdb from "@/assets/acdb.jpg";
+import dcdb from "@/assets/dcdb.jpg";
+import earthing from "@/assets/earthing.jpg";
+import surge from "@/assets/surge.jpg";
+import connectors from "@/assets/connectors.jpg";
+import meter from "@/assets/meter.jpg";
 
-/* Placeholder discounts — illustrative, pending vendor-quote lock.
-   Kits (15%) is the only locked figure. */
-export const DISCOUNT = { kit: 0.15, part: 0.07, inverterPart: 0.08 };
+/** JetFlo partner price is a flat 15% below the open-market reference. */
+export const JETFLO_DISCOUNT = 0.15;
+export const DISCOUNT = { kit: 0.15, part: 0.15, inverterPart: 0.15 };
+
+/** JetFlo price for a market figure. */
+export function jetfloPrice(market: number) {
+  return market * (1 - JETFLO_DISCOUNT);
+}
+
 
 export type PmPlan = { yrs: string; cost: number };
 
@@ -165,15 +177,90 @@ export const PARTS: Product[] = [
     warranty: "3-yr top-up warranty",
     img: bos,
   },
+  {
+    id: "acc-acdb",
+    kind: "part",
+    category: "bos",
+    categoryLabel: "All roof sizes",
+    name: "ACDB Module — 1P / 3P",
+    market: 4200,
+    desc: "AC distribution board with MCB, SPD and isolator, pre-wired and IP65 rated.",
+    vendor: "Havells",
+    warranty: "3-yr top-up warranty",
+    img: acdb,
+  },
+  {
+    id: "acc-dcdb",
+    kind: "part",
+    category: "bos",
+    categoryLabel: "All roof sizes",
+    name: "DCDB Module — 2-in 1-out",
+    market: 3800,
+    desc: "DC distribution board with string fuses, DC isolator and surge protection.",
+    vendor: "Elmex",
+    warranty: "3-yr top-up warranty",
+    img: dcdb,
+  },
+  {
+    id: "acc-earthing",
+    kind: "part",
+    category: "earthing",
+    categoryLabel: "All roof sizes",
+    name: "Earthing Kit — Copper Bonded",
+    market: 5400,
+    desc: "Copper-bonded electrode, backfill compound, clamps and green earth wire run.",
+    vendor: "Ashlok",
+    warranty: "3-yr top-up warranty",
+    img: earthing,
+  },
+  {
+    id: "acc-la",
+    kind: "part",
+    category: "earthing",
+    categoryLabel: "All roof sizes",
+    name: "Lightning Arrester & SPD Set",
+    market: 6800,
+    desc: "Roof-mounted lightning arrester with matched DC surge protection device.",
+    vendor: "Indelec",
+    warranty: "3-yr top-up warranty",
+    img: surge,
+  },
+  {
+    id: "acc-mc4",
+    kind: "part",
+    category: "wiring",
+    categoryLabel: "All roof sizes",
+    name: "MC4 Connector & DC Cable Pack",
+    market: 3200,
+    desc: "IP68 MC4 male/female pairs plus 4 sq mm UV-rated DC solar cable coil.",
+    vendor: "Staubli-spec",
+    warranty: "3-yr top-up warranty",
+    img: connectors,
+  },
+  {
+    id: "acc-meter",
+    kind: "part",
+    category: "monitoring",
+    categoryLabel: "All roof sizes",
+    name: "Net Meter & Monitoring Unit",
+    market: 7500,
+    desc: "Bi-directional net meter with generation monitoring, DISCOM-approval ready.",
+    vendor: "Secure Meters",
+    warranty: "3-yr top-up warranty",
+    img: meter,
+  },
 ];
 
 export const PART_FILTERS = [
   { key: "all", label: "All parts" },
   { key: "panels", label: "Panels" },
   { key: "mounting", label: "Mounting" },
-  { key: "wiring", label: "Wiring" },
-  { key: "bos", label: "BOS" },
+  { key: "wiring", label: "Wiring & cables" },
+  { key: "bos", label: "ACDB / DCDB & BOS" },
+  { key: "earthing", label: "Earthing & protection" },
+  { key: "monitoring", label: "Metering" },
 ];
+
 
 export type Kit = {
   id: string;

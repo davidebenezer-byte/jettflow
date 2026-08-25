@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Check } from "lucide-react";
 
-import { DISCOUNT, PM_PLANS, fmt, type Kit } from "@/lib/catalog";
+import { JETFLO_DISCOUNT, PM_PLANS, fmt, jetfloPrice, type Kit } from "@/lib/catalog";
 import { useCart } from "@/lib/cart";
 import { cn } from "@/lib/utils";
 import { MfgBadge, PoweredBadge } from "./Badges";
@@ -18,11 +18,12 @@ export function KitCard({ kit }: { kit: Kit }) {
       id: `${kit.id}|${plan.yrs}`,
       name: kit.name,
       img: kit.img,
-      unitPrice: kit.market * (1 - DISCOUNT.kit) + plan.cost,
+      unitPrice: jetfloPrice(kit.market) + plan.cost,
       marketPrice: kit.market + plan.cost,
       pmLabel: plan.yrs,
     });
   }
+
 
   return (
     <article
@@ -57,11 +58,19 @@ export function KitCard({ kit }: { kit: Kit }) {
         </div>
 
         <div className="rounded-2xl bg-background p-4">
-          <div className="font-display text-2xl font-extrabold">{fmt(kit.market)}</div>
-          <div className="mt-1 text-[11.5px] text-muted-foreground italic">
-            Reference price · partners get 15% off, confirmed in your quote
+          <div className="flex items-baseline gap-2.5">
+            <span className="font-display text-2xl font-extrabold text-amber-ink">
+              {fmt(jetfloPrice(kit.market))}
+            </span>
+            <span className="font-display text-[15px] text-muted-foreground line-through">
+              {fmt(kit.market)}
+            </span>
+          </div>
+          <div className="label-caps mt-2 inline-block rounded-full bg-amber-soft px-2.5 py-1 text-amber-ink">
+            JetFlo price · {Math.round(JETFLO_DISCOUNT * 100)}% below market
           </div>
         </div>
+
 
         <ul className="flex flex-col gap-2.5">
           {kit.contents.map((c) => (
@@ -91,7 +100,7 @@ export function KitCard({ kit }: { kit: Kit }) {
                 : "bg-primary text-primary-foreground hover:bg-primary/90",
             )}
           >
-            Add kit to quote
+            Add kit to cart
           </button>
         </div>
       </div>

@@ -2,13 +2,14 @@ import { createContext, useContext, useMemo, useState, type ReactNode } from "re
 import { ShieldCheck } from "lucide-react";
 
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { DISCOUNT, PM_PLANS, fmt, type Product } from "@/lib/catalog";
+import { JETFLO_DISCOUNT, PM_PLANS, fmt, jetfloPrice, type Product } from "@/lib/catalog";
 import { useCart } from "@/lib/cart";
 import { MfgBadge, PoweredBadge } from "./Badges";
 import { PmSelector } from "./PmSelector";
 
 type DetailContextValue = { openProduct: (product: Product) => void };
 const DetailContext = createContext<DetailContextValue | null>(null);
+
 
 export function useProductDetail() {
   const ctx = useContext(DetailContext);
@@ -37,17 +38,17 @@ export function ProductDetailProvider({ children }: { children: ReactNode }) {
 
   function addToCart() {
     if (!product) return;
-    const discount = isInverter ? DISCOUNT.inverterPart : DISCOUNT.part;
     addLine({
       id: `${product.id}|${plan.yrs}`,
       name: product.name,
       img: product.img,
-      unitPrice: product.market * (1 - discount) + plan.cost,
+      unitPrice: jetfloPrice(product.market) + plan.cost,
       marketPrice: product.market + plan.cost,
       pmLabel: plan.yrs,
     });
     setProduct(null);
   }
+
 
   return (
     <DetailContext.Provider value={value}>
@@ -107,9 +108,16 @@ export function ProductDetailProvider({ children }: { children: ReactNode }) {
               <PmSelector plans={plans} value={pmIndex} onChange={setPmIndex} />
 
               <div>
-                <div className="font-display text-xl font-extrabold">{fmt(product.market)}</div>
-                <div className="mt-0.5 text-[11.5px] text-muted-foreground italic">
-                  Reference price · your partner price comes with the quote
+                <div className="flex items-baseline gap-2.5">
+                  <span className="font-display text-xl font-extrabold text-amber-ink">
+                    {fmt(jetfloPrice(product.market))}
+                  </span>
+                  <span className="font-display text-[14px] text-muted-foreground line-through">
+                    {fmt(product.market)}
+                  </span>
+                </div>
+                <div className="label-caps mt-2 inline-block rounded-full bg-amber-soft px-2.5 py-1 text-amber-ink">
+                  JetFlo price · {Math.round(JETFLO_DISCOUNT * 100)}% below market
                 </div>
               </div>
 
@@ -118,8 +126,9 @@ export function ProductDetailProvider({ children }: { children: ReactNode }) {
                 onClick={addToCart}
                 className="w-full rounded-full bg-primary px-6 py-3.5 font-display text-[13.5px] font-extrabold text-primary-foreground transition-colors hover:bg-primary/90"
               >
-                Add to quote
+                Add to cart
               </button>
+
             </div>
           )}
         </SheetContent>

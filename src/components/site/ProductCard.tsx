@@ -1,4 +1,4 @@
-import { DISCOUNT, fmt, type Product } from "@/lib/catalog";
+import { JETFLO_DISCOUNT, fmt, jetfloPrice, type Product } from "@/lib/catalog";
 import { useCart } from "@/lib/cart";
 import { MfgBadge, PoweredBadge, SizeBadge } from "./Badges";
 import { useProductDetail } from "./ProductDetailPanel";
@@ -9,16 +9,16 @@ export function ProductCard({ product }: { product: Product }) {
   const isInverter = product.kind === "inverter";
 
   function quickAdd() {
-    const discount = isInverter ? DISCOUNT.inverterPart : DISCOUNT.part;
     addLine({
       id: `${product.id}|nopm`,
       name: product.name,
       img: product.img,
-      unitPrice: product.market * (1 - discount),
+      unitPrice: jetfloPrice(product.market),
       marketPrice: product.market,
       pmLabel: "No PM plan",
     });
   }
+
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift">
@@ -50,9 +50,16 @@ export function ProductCard({ product }: { product: Product }) {
 
         <div className="mt-auto pt-4">
           <div className="border-t border-border pt-3.5">
-            <div className="font-display text-lg font-extrabold">{fmt(product.market)}</div>
-            <div className="mt-0.5 text-[11px] text-muted-foreground italic">
-              Discounted price calculated at checkout
+            <div className="flex items-baseline gap-2">
+              <span className="font-display text-lg font-extrabold text-amber-ink">
+                {fmt(jetfloPrice(product.market))}
+              </span>
+              <span className="font-display text-[13px] text-muted-foreground line-through">
+                {fmt(product.market)}
+              </span>
+            </div>
+            <div className="label-caps mt-1.5 inline-block rounded-full bg-amber-soft px-2.5 py-1 text-amber-ink">
+              JetFlo price · {Math.round(JETFLO_DISCOUNT * 100)}% below market
             </div>
           </div>
           <div className="mt-4 flex gap-2">
@@ -68,8 +75,9 @@ export function ProductCard({ product }: { product: Product }) {
               onClick={quickAdd}
               className="flex-1 rounded-full bg-primary px-4 py-2.5 font-display text-[12.5px] font-bold text-primary-foreground transition-colors hover:bg-primary/90"
             >
-              Add to quote
+              Add to cart
             </button>
+
           </div>
         </div>
       </div>
