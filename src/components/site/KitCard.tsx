@@ -100,7 +100,7 @@ export function KitCard({ kit }: { kit: Kit }) {
                 : "bg-primary text-primary-foreground hover:bg-primary/90",
             )}
           >
-            Add kit to quote
+            Add kit to cart
           </button>
         </div>
       </div>
