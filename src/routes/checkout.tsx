@@ -51,7 +51,10 @@ function Checkout() {
   if (lines.length === 0) {
     return (
       <div className="mx-auto max-w-[1180px] px-5 pt-12 sm:px-8 sm:pt-16">
-        <PageHeading title="Your list is empty" lede="Add a kit or a few parts, then come back to see an indicative partner price and request a quote." />
+        <PageHeading
+          title="Your list is empty"
+          lede="Add a kit or a few parts, then come back to see an indicative partner price and request a quote."
+        />
         <div className="mt-7 flex flex-wrap gap-3">
           <Link
             to="/kits"
@@ -94,18 +97,16 @@ function Checkout() {
 
       setSubmitting(true);
       try {
-        const { error } = await supabase
-          .from("leads")
-          .insert([
-            {
-              name: name.trim(),
-              phone: phone.replace(/\D/g, "").slice(-10),
-              email: email.trim(),
-              company: company.trim() || null,
-              city,
-              interest: "Pre-checkout Guest details",
-            },
-          ]);
+        const { error } = await supabase.from("leads").insert([
+          {
+            name: name.trim(),
+            phone: phone.replace(/\D/g, "").slice(-10),
+            email: email.trim(),
+            company: company.trim() || null,
+            city,
+            interest: "Pre-checkout Guest details",
+          },
+        ]);
 
         if (error) {
           console.error("Error storing lead:", error);
@@ -142,7 +143,11 @@ function Checkout() {
           </p>
         </div>
 
-        <form onSubmit={handleProceed} noValidate className="rounded-3xl border border-border bg-card p-6 shadow-card sm:p-8">
+        <form
+          onSubmit={handleProceed}
+          noValidate
+          className="rounded-3xl border border-border bg-card p-6 shadow-card sm:p-8"
+        >
           <div className="grid gap-4">
             <div>
               <label className="label-caps text-muted-foreground" htmlFor="checkout-name">
@@ -159,7 +164,9 @@ function Checkout() {
                 placeholder="Enter first name"
                 autoComplete="name"
               />
-              {errors.name && <p className="mt-1.5 text-[11.5px] text-destructive">{errors.name}</p>}
+              {errors.name && (
+                <p className="mt-1.5 text-[11.5px] text-destructive">{errors.name}</p>
+              )}
             </div>
 
             <div>
@@ -178,7 +185,9 @@ function Checkout() {
                 inputMode="tel"
                 autoComplete="tel"
               />
-              {errors.phone && <p className="mt-1.5 text-[11.5px] text-destructive">{errors.phone}</p>}
+              {errors.phone && (
+                <p className="mt-1.5 text-[11.5px] text-destructive">{errors.phone}</p>
+              )}
             </div>
 
             <div>
@@ -198,7 +207,9 @@ function Checkout() {
                 inputMode="email"
                 autoComplete="email"
               />
-              {errors.email && <p className="mt-1.5 text-[11.5px] text-destructive">{errors.email}</p>}
+              {errors.email && (
+                <p className="mt-1.5 text-[11.5px] text-destructive">{errors.email}</p>
+              )}
             </div>
 
             <div>
@@ -235,7 +246,9 @@ function Checkout() {
                   </option>
                 ))}
               </select>
-              {errors.city && <p className="mt-1.5 text-[11.5px] text-destructive">{errors.city}</p>}
+              {errors.city && (
+                <p className="mt-1.5 text-[11.5px] text-destructive">{errors.city}</p>
+              )}
             </div>
           </div>
 
@@ -256,32 +269,29 @@ function Checkout() {
     if (!lead) return;
     setConfirmingOrder(true);
     try {
-      const itemsSummary = lines
-        .map((l) => `${l.qty} × ${l.name} (PM: ${l.pmLabel})`)
-        .join("\n");
+      const itemsSummary = lines.map((l) => `${l.qty} × ${l.name} (PM: ${l.pmLabel})`).join("\n");
 
-      const { error } = await supabase
-        .from("orders")
-        .insert([
-          {
-            name: lead.name,
-            phone: lead.phone,
-            email: lead.email,
-            company: lead.company || null,
-            city: lead.city,
-            delivery_option: deliveryOption === "pickup" ? "Pickup from Warehouse" : "Porter Delivery",
-            items: itemsSummary,
-            total_price: jetfloTotal,
-            reference_total: referenceTotal,
-          },
-        ]);
+      const { error } = await supabase.from("orders").insert([
+        {
+          name: lead.name,
+          phone: lead.phone,
+          email: lead.email,
+          company: lead.company || null,
+          city: lead.city,
+          delivery_option:
+            deliveryOption === "pickup" ? "Pickup from Warehouse" : "Porter Delivery",
+          items: itemsSummary,
+          total_price: jetfloTotal,
+          reference_total: referenceTotal,
+        },
+      ]);
 
       if (error) {
         console.error("Order insertion error:", error);
         toast.error("Failed to place order: " + error.message);
       } else {
         toast.success("Order confirmed! Redirecting to schedule a call...");
-        
+
         // Clear all items in the cart
         lines.forEach((line) => {
           removeLine(line.id);
@@ -375,7 +385,9 @@ function Checkout() {
                     onChange={() => setDeliveryOption("pickup")}
                     className="accent-amber"
                   />
-                  <span className="font-display text-[13.5px] font-bold">Pickup from Warehouse</span>
+                  <span className="font-display text-[13.5px] font-bold">
+                    Pickup from Warehouse
+                  </span>
                 </div>
                 <p className="text-[12px] text-muted-foreground mt-2 pl-5">
                   Order available for Pickup Immediately.
@@ -399,7 +411,9 @@ function Checkout() {
                     onChange={() => setDeliveryOption("porter")}
                     className="accent-amber"
                   />
-                  <span className="font-display text-[13.5px] font-bold">Get it delivered to your location</span>
+                  <span className="font-display text-[13.5px] font-bold">
+                    Get it delivered to your location
+                  </span>
                 </div>
                 <p className="text-[12px] text-muted-foreground mt-2 pl-5">
                   Powered by Porter (additional charges apply).
@@ -413,7 +427,8 @@ function Checkout() {
               <Truck className="size-4 text-amber-ink" /> 3–6 day assured delivery
             </span>
             <span className="inline-flex items-center gap-2">
-              <ShieldCheck className="size-4 text-amber-ink" /> Warranty registered to your partner account
+              <ShieldCheck className="size-4 text-amber-ink" /> Warranty registered to your partner
+              account
             </span>
           </div>
         </div>
@@ -443,11 +458,14 @@ function Checkout() {
               <div className="mt-3 border-t border-amber-ink/15 pt-2.5 text-[12px] text-amber-ink/90 flex justify-between">
                 <span>Delivery:</span>
                 <span className="font-bold">
-                  {deliveryOption === "pickup" ? "Pickup (Immediate)" : "Porter delivery (additional)"}
+                  {deliveryOption === "pickup"
+                    ? "Pickup (Immediate)"
+                    : "Porter delivery (additional)"}
                 </span>
               </div>
               <p className="mt-3 text-[11.5px] text-muted-foreground italic">
-                Indicative only, pending vendor lock. GST, freight and final figures are confirmed in your written quote.
+                Indicative only, pending vendor lock. GST, freight and final figures are confirmed
+                in your written quote.
               </p>
             </div>
           ) : null}
@@ -466,7 +484,7 @@ function Checkout() {
               </>
             )}
           </button>
-          
+
           <p className="mt-3 text-center text-[11px] text-muted-foreground">
             Order details will be confirmed directly during your booked slot.
           </p>
@@ -480,7 +498,8 @@ function Checkout() {
             Connect with our representative
           </h2>
           <p className="mt-3 text-[14.5px] text-muted-foreground leading-relaxed">
-            Need help customising your kit size, discussing specific warehouse locations, or planning Porter last-mile transit? Book a 30-minute call with our solar supply desk.
+            Need help customising your kit size, discussing specific warehouse locations, or
+            planning Porter last-mile transit? Book a 30-minute call with our solar supply desk.
           </p>
           <div className="mt-7">
             <a

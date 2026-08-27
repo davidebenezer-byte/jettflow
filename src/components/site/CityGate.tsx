@@ -37,7 +37,6 @@ export function CityGate() {
       className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-foreground/60 p-4 backdrop-blur-sm sm:items-center"
     >
       <div className="my-auto w-full max-w-[440px] overflow-hidden rounded-3xl border border-border bg-card shadow-lift">
-
         <div className="border-b border-border px-7 pt-7 pb-6">
           <span className="label-caps inline-flex items-center gap-2 rounded-full bg-amber-soft px-3 py-1.5 text-amber-ink">
             <MapPin className="size-3.5" /> Before you browse
@@ -46,8 +45,8 @@ export function CityGate() {
             Tell us where you're buying for
           </h2>
           <p className="mt-2 text-[13px] text-muted-foreground">
-            Stock, pickup warehouse and delivery timelines change by city. Three details and
-            you're in.
+            Stock, pickup warehouse and delivery timelines change by city. Three details and you're
+            in.
           </p>
         </div>
 
@@ -141,4 +140,3 @@ export function CityGate() {
     </div>
   );
 }
-

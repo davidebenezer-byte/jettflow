@@ -66,20 +66,18 @@ export function LeadForm({ summary }: { summary?: string | undefined }) {
     setSending(true);
 
     try {
-      const { error } = await supabase
-        .from("leads")
-        .insert([
-          {
-            name: values.name.trim(),
-            company: values.company.trim() || null,
-            phone: values.phone.replace(/\D/g, "").slice(-10),
-            email: values.email.trim(),
-            city: values.city.trim(),
-            interest: values.interest,
-            notes: values.notes.trim() || null,
-            summary: summary || null,
-          },
-        ]);
+      const { error } = await supabase.from("leads").insert([
+        {
+          name: values.name.trim(),
+          company: values.company.trim() || null,
+          phone: values.phone.replace(/\D/g, "").slice(-10),
+          email: values.email.trim(),
+          city: values.city.trim(),
+          interest: values.interest,
+          notes: values.notes.trim() || null,
+          summary: summary || null,
+        },
+      ]);
 
       if (error) {
         console.error("Supabase insert error:", error);
@@ -88,7 +86,7 @@ export function LeadForm({ summary }: { summary?: string | undefined }) {
         setDone(true);
         toast.success("Enquiry received — our team will call you within one working day.");
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error("Submission error:", err);
       toast.error("An unexpected error occurred. Please try again.");
     } finally {
@@ -102,8 +100,8 @@ export function LeadForm({ summary }: { summary?: string | undefined }) {
         <h3 className="font-display text-xl">Thanks, {values.name.split(" ")[0]}.</h3>
         <p className="mx-auto mt-2.5 max-w-[420px] text-[13.5px] text-amber-ink">
           Your enquiry is with our AP &amp; Telangana supply desk. Expect a call on{" "}
-          <b className="text-foreground">{values.phone}</b> within one working day with your
-          partner quote and current stock position.
+          <b className="text-foreground">{values.phone}</b> within one working day with your partner
+          quote and current stock position.
         </p>
         <button
           type="button"
@@ -229,7 +227,11 @@ export function LeadForm({ summary }: { summary?: string | undefined }) {
             className={inputCls}
             value={values.notes}
             onChange={(e) => set("notes", e.target.value)}
-            placeholder={summary ? "Add site details, timelines or quantities…" : "Sizes, quantities, site location, timeline…"}
+            placeholder={
+              summary
+                ? "Add site details, timelines or quantities…"
+                : "Sizes, quantities, site location, timeline…"
+            }
           />
         </div>
       </div>
