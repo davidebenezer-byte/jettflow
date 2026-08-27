@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -134,6 +135,8 @@ function RootComponent() {
 
 function InnerRoot() {
   const { selectedCity, ready, setCity } = useCity();
+  const routerState = useRouterState();
+  const isHome = routerState.location.pathname === "/";
 
   if (!ready) {
     return (
@@ -150,7 +153,7 @@ function InnerRoot() {
           <div className="flex min-h-screen flex-col">
             <Nav />
             <main className="flex-1">
-              {selectedCity === "Hyderabad" ? (
+              {isHome || selectedCity === "Hyderabad" ? (
                 <Outlet />
               ) : (
                 <CitySelection onSelectCity={(city) => setCity(city)} />

@@ -22,7 +22,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Pre-configured 2/3/5kW rooftop kits and individual parts for installer-partners. JetFlo price revealed at checkout.",
+          "Pre-configured 2/3/5kW rooftop kits and individual parts for installer-partners. Get partner pricing instantly at checkout.",
       },
     ],
   }),

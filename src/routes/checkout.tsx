@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Lock, MapPin, PartyPopper, ShieldCheck, Truck, Loader2 } from "lucide-react";
+import { ArrowRight, MapPin, PartyPopper, ShieldCheck, Truck, Loader2 } from "lucide-react";
 
 import { PageHeading } from "@/components/site/PageHeading";
 import { fmt } from "@/lib/catalog";
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/checkout")({
 
 function Checkout() {
   const { lines, referenceTotal, jetfloTotal, removeLine } = useCart();
-  const [revealed, setRevealed] = useState(false);
+  const revealed = true;
   const [deliveryOption, setDeliveryOption] = useState<"pickup" | "porter">("pickup");
   const saving = referenceTotal - jetfloTotal;
   const pct = referenceTotal > 0 ? Math.round((saving / referenceTotal) * 100) : 0;
@@ -450,29 +450,13 @@ function Checkout() {
                 Indicative only, pending vendor lock. GST, freight and final figures are confirmed in your written quote.
               </p>
             </div>
-          ) : (
-            <div className="mt-4 rounded-2xl border border-dashed border-amber bg-amber-soft p-5 text-center">
-              <Lock className="mx-auto size-5 text-amber-ink" />
-              <p className="mt-2.5 text-[12.5px] text-amber-ink">
-                Your indicative partner price is hidden until you reveal it. Discounts apply to the whole list — 15% on kits, a partner margin on individual parts.
-              </p>
-            </div>
-          )}
-
-          <button
-            type="button"
-            onClick={() => setRevealed(true)}
-            disabled={revealed}
-            className="mt-5 w-full rounded-full bg-primary px-6 py-3.5 font-display text-[13.5px] font-extrabold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-40"
-          >
-            {revealed ? "Price revealed" : "Reveal indicative price"}
-          </button>
+          ) : null}
 
           <button
             type="button"
             onClick={handleConfirmOrder}
             disabled={confirmingOrder}
-            className="mt-2.5 flex w-full items-center justify-center gap-2 rounded-full bg-amber px-6 py-3.5 font-display text-[13.5px] font-extrabold text-accent-foreground transition-colors hover:bg-amber/90 disabled:opacity-50"
+            className="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-amber px-6 py-3.5 font-display text-[13.5px] font-extrabold text-accent-foreground transition-colors hover:bg-amber/90 disabled:opacity-50"
           >
             {confirmingOrder ? (
               <Loader2 className="size-4 animate-spin" />

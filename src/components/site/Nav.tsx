@@ -19,13 +19,6 @@ export function Nav() {
   
   const isHyderabad = ready && selectedCity === "Hyderabad";
 
-  const handleNavClick = (e: React.MouseEvent, label: string) => {
-    if (!isHyderabad) {
-      e.preventDefault();
-      toast.warning(`Please select your city first to browse ${label}!`);
-    }
-  };
-
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md">
       <nav className="mx-auto flex max-w-[1180px] items-center justify-between gap-3 px-5 py-3.5 sm:px-8">
@@ -55,7 +48,6 @@ export function Nav() {
               <Link
                 key={l.to}
                 to={l.to}
-                onClick={(e) => handleNavClick(e, l.label)}
                 activeProps={{ className: "bg-primary text-primary-foreground" }}
                 className="shrink-0 rounded-full px-3 py-2 font-display text-[13px] font-bold whitespace-nowrap transition-colors hover:bg-foreground/5 sm:px-4 sm:text-[13.5px]"
               >
@@ -64,13 +56,11 @@ export function Nav() {
             ))}
           </div>
 
-          <button
-            type="button"
+          <Link
+            to="/checkout"
             onClick={(e) => {
-              if (!isHyderabad) {
+              if (isHyderabad) {
                 e.preventDefault();
-                toast.warning("Please select your city first to view your list!");
-              } else {
                 openCart();
               }
             }}
@@ -81,7 +71,7 @@ export function Nav() {
             <span className="absolute -top-1.5 -right-1.5 grid size-[19px] place-items-center rounded-full border-2 border-background bg-amber text-[10.5px] font-extrabold text-accent-foreground">
               {count}
             </span>
-          </button>
+          </Link>
         </div>
       </nav>
     </header>
