@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, MapPin, PartyPopper, ShieldCheck, Truck, Loader2 } from "lucide-react";
+import { ArrowRight, Lock, MapPin, PartyPopper, ShieldCheck, Truck, Loader2 } from "lucide-react";
 
 import { PageHeading } from "@/components/site/PageHeading";
 import { fmt } from "@/lib/catalog";
