@@ -65,7 +65,7 @@ export function CityGate() {
                   setName(e.target.value);
                   setErrors((p) => ({ ...p, name: "" }));
                 }}
-                placeholder="Ravi Kumar"
+                placeholder="Enter first name"
                 autoComplete="name"
               />
               {errors.name && (
@@ -85,7 +85,7 @@ export function CityGate() {
                   setPhone(e.target.value);
                   setErrors((p) => ({ ...p, phone: "" }));
                 }}
-                placeholder="98765 43210"
+                placeholder="Enter mobile number"
                 inputMode="tel"
                 autoComplete="tel"
               />

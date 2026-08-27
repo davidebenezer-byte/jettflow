@@ -156,7 +156,7 @@ function Checkout() {
                   setName(e.target.value);
                   setErrors((p) => ({ ...p, name: "" }));
                 }}
-                placeholder="Ravi Kumar"
+                placeholder="Enter first name"
                 autoComplete="name"
               />
               {errors.name && <p className="mt-1.5 text-[11.5px] text-destructive">{errors.name}</p>}
@@ -174,7 +174,7 @@ function Checkout() {
                   setPhone(e.target.value);
                   setErrors((p) => ({ ...p, phone: "" }));
                 }}
-                placeholder="98765 43210"
+                placeholder="Enter mobile number"
                 inputMode="tel"
                 autoComplete="tel"
               />
